@@ -658,3 +658,130 @@ watch(btn, (valor) => {
 ``` 
 
 > Ya no se utiliza el export
+
+
+<div style="margin-bottom:50px;"></div>
+
+## Preguntas frecuentes
+
+1. ¿Para qué sirve el archivo App.vue?
+ - Es el root component que contiene a toda nuestra aplicación
+
+2. ¿Cuál es la forma de crear watchers en Composition API?
+
+ - Utilizando wath como una función
+
+3. ¿Cuál es la función de Vue CLI?
+
+ - Permitirnos crear y configurar nuestros proyectos
+
+4. ¿Qué sucede con el return al utilizar script setup?
+
+ - Ya no es necesario porque ahora todo, en el contexto de setup, está expuesto para el template
+
+5. ¿Porqué no podemos acceder a otras propiedades de instancia en setup de Composition API?
+
+ - Porque esta se ejecuta antes que el Options API, por lo que no podemos acceder a nada de lo que antes se accedía con this.
+
+6. ¿Para qué nos sirven los teleports?
+
+ - Para enviar elementos del DOM a otra parte distinta a dónde se definieron
+
+7. ¿Cuál es la forma de crear propiedades computadas en Composition API?
+
+ - Utilizando computed como una función
+
+8. ¿Cuál es la principal diferencia entre Options API y Composition API?
+
+ - Options API utiliza JSON para definir el component, mientras que Composition API utiliza una sintaxis de programación funcional
+
+9. ¿Cuál es la principal ventaja de Composition API sobre Options API?
+
+ - Que podemos escribir código directamente en lugar de hacer todo en un objecto JSON
+ - Que podemos organizar nuestro código por lo que hace y no por lo que cada cosa significa para el framework
+ - Que podemos utilizar una sintaxis de programación funcional y reactiva
+ - Que podemos reutilizar nuestro código sin necesidad de mixins
+
+10. ¿Qué es el Virtual DOM?
+
+ - Es un objecto de Javascript que representa el àrbol DOM pero nos permite realizar modificaciones màs eficientes
+
+11. ¿Cuál es la principal diferencia al utilizar script setup?
+
+  - Que tendremos que importar nuevas funciones para definir cosas como props, emits, expose
+
+12. ¿Qué sucede con el export default al utilizar script setup?
+
+  - Ya no podemos utilizar porque causarìa un conflicto, ademàs ya no es necesario
+
+13. ¿Cuál de estos NO es un hook de ciclo de vida de VueJS?
+
+  - crashed
+
+14. ¿Cuál es la principal desventaja de la sintaxis script setup?
+
+  - Que solo podemos utilizarla dentro de Single File Components
+
+15. ¿Cómo podemos utilizar $ref en Composition API?
+
+  - No podemos, para esto contamos con las variables ref y exponerlas en el return de la función septup
+
+16. ¿Qué cosas podemos acceder vía context en Composition API?
+
+  - Attrs, emit, expose y slots
+
+17. ¿Cómo puedes definir componentes asíncronos en VueJS?
+
+  - Por medio de importar los componentes con defineAsyncComponent
+
+18. ¿Porqué se creó Composition API?
+
+  - Para permitir un código más limpio, reutilizable y mejor organizado
+
+19. ¿Cómo se utiliza Provide/Inject en Composition API?
+
+  - Utilizando provide e inject como funciones
+
+20. ¿Cuáles son las clases que nos genera el componente transition?
+
+  - Las clases necesarias para utilizar: enter, leave, active, from y start
+
+21. ¿Cuáles son las funciones para crear variables reactivas en Composition API?
+
+  - Ref y Reactive
+
+22. ¿Qué podemos hacer con los hooks del ciclo de vida de componentes?
+
+  - Podemos ejecutar código en cada etapa distinta del ciclo de vida de un componente
+
+23. ¿Qué son los built-in components de VueJS?
+
+  - Algunos componentes que VUEJS nos ofrece, para hacer componente de una forma más profesional
+
+24. ¿Para qué sirven los mixins?
+
+  - Nos permiten reutilizar código entre componentes
+
+25. ¿Cuál es la forma de utilizar hooks del ciclo de vida en Composition API?
+
+  - 
+
+26. ¿Cuál es el comando para generar un nuevo proyecto en Vue CLI?
+
+  - vue create
+
+27. ¿Cómo puedes definir componentes dinámicos en VueJS?
+
+  - Utilizando con su atributo is
+
+28. ¿Cómo puedes hacer reactivos los props dentro de setup en Composition API?
+
+  - Utilizando toRefs
+
+29. ¿Cuál es la principal ventaja de la sintaxis script setup?
+
+  - 
+
+30. ¿Cuál es la función que reemplaza los hooks beforeCreate y created?
+
+  - Setup
