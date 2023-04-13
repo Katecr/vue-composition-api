@@ -9,6 +9,7 @@
 1. [Introducción a Vue CLI](#introducción-a-vue-cli)
 2. [Estructura del proyecto](#estructura-del-proyecto)
 3. [Componentes dinámicos](#componentes-dinámicos)
+4. [Componentes asíncronos](#componentes-asíncronos)
 
 <div style="margin-bottom:50px;"></div>
 
@@ -79,3 +80,34 @@ npm run serve
 <div style="margin-bottom:50px;"></div>
 
 ## Componentes dinámicos
+
+ Vue nos ofrece la posibilidad de generar componente dinamicos usando tag de vue ```<component>```
+
+ ha este tag le defininimos la directriz ```v-bind``` para hacerlo reactivo, para complementar el v-bind se usa la palabra reservada de vue ```is```, este va tomar el valor del componente(nombre del componente definido en la propiedad components del componente(que lo contiene) y no el nombre con el que lo estamos importando.), osea que dependiendo del valor de is se muestra cierto componente u otro.
+
+```javascript
+ component :is="componente" />
+```
+
+Para que los estilos solo afecte al componente de interes y no de manera global a los otros componentes añadimos en el tag style la palabra reservada scoped
+
+```html
+<style scoped>
+    css
+</style>
+```
+
+<div style="margin-bottom:50px;"></div>
+
+## Componentes asíncronos
+
+Son aquellos componentes que quiero que carguen despues de que carguen los componentes principales e importantes de mi aplicacion. Para poder hacer esto debo importar de vue la propiedad defineAsyncComponent, antes del export default.
+
+```javascript
+import {defineAsyncComponent} from "vue";
+
+const HelloWorld = defineAsyncComponent(()=> import("./components/HelloWorld.vue"))
+```
+### Ventajas
+1. Que los proyectos carguen mucho más rapido
+2. Que los proyectos solo carguen los componbentes que van a necesitar

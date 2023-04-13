@@ -1,6 +1,10 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+//import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
+
+import {defineAsyncComponent} from "vue";
+
+const HelloWorld = defineAsyncComponent(()=> import("./components/HelloWorld.vue"))
 </script>
 
 <template>
