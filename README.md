@@ -11,6 +11,7 @@
 3. [Componentes dinámicos](#componentes-dinámicos)
 4. [Componentes asíncronos](#componentes-asíncronos)
 5. [Transiciones](#transiciones)
+6. [Teleports](#teleports)
 
 <div style="margin-bottom:50px;"></div>
 
@@ -160,7 +161,9 @@ export default {
 Los modificadores que tiene una trancisión es:
 
 **from:** cuando se inicia la transición
+
 **to:** cuando se termina la transición
+
 **active:** cuando se está ejecutando la transición
 
 Para que funcione la transición, se debe agregar la clase .fade-enter-active o .fade-leave-active a los elementos que se quieren animar.
@@ -168,3 +171,29 @@ Para que funcione la transición, se debe agregar la clase .fade-enter-active o 
 **fade-enter-active:** cuando se inicia la transición
 
 **fade-leave-active:** cuando se termina la transición
+
+
+<div style="margin-bottom:50px;"></div>
+
+## Teleports
+
+Componente que nos proporciona vue, que me permite inyectar secciones de componentes (templates) en otros elementos del DOM como el body. sintaxis ```<teleport>``` este debe envolver la seccion que quiero inyectar en algun elemento del DOM.
+
+```javascript
+<template>
+  <div>
+    <button @click="toggle">Modal</button>
+    
+    <teleport to="body">
+        <div v-show="show" class="modal">
+            <div class="modal-content">
+                <p>Some text in the Modal..</p>
+                <button @click="toggle" class="close">
+                Cerrar
+                </button>
+            </div>
+        </div>
+    </teleport>
+  </div>
+</template>
+```

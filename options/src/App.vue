@@ -1,9 +1,9 @@
 <script>
-import Menu from "./components/vMenu.vue";
+import Modal from "./components/Modal.vue";
 
 export default {
   name: "App",
-  components: { Menu },
+  components: { Modal },
   data() {
     return {
       show: false,
@@ -13,19 +13,9 @@ export default {
 </script>
 
 <template>
-    <button @click="show = !show">Menu</button>
-    <transition name="fade">
-      <Menu v-show="show" />
-    </transition>
+    <Modal />
 </template>
 
 <style >
-.fade-enter-from,
-.fade-leave-to{
-  opacity:0;
-}
-.fade-enter-active,
-.fade-leave-active{
-  transition: opacity 0.3s ease;
-}
+
 </style>
