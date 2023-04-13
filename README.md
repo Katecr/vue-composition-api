@@ -12,6 +12,7 @@
 4. [Componentes asíncronos](#componentes-asíncronos)
 5. [Transiciones](#transiciones)
 6. [Teleports](#teleports)
+7. [Ciclo de vida de los componentes](#ciclo-de-vida-de-los-componentes)
 
 <div style="margin-bottom:50px;"></div>
 
@@ -196,4 +197,113 @@ Componente que nos proporciona vue, que me permite inyectar secciones de compone
     </teleport>
   </div>
 </template>
+```
+
+<div style="margin-bottom:50px;"></div>
+
+## Ciclo de vida de los componentes
+
+> https://vuejs.org/api/options-lifecycle.html
+
+Ciclo de vida de los componentes, también conocidos como lifecycle hooks son funciones que nos permiten definir acciones en cada etapa del ciclo de los componentes
+
+1. beforeCreate.
+2. created.
+3. beforeMount.
+4. mounted.
+5. beforeUpdate.
+6. updated.
+7. beforeUnmount.
+8. unmounted.
+
+<div>
+  <figure>
+    <img src="img_readme/LifeCycle.png" />
+  </figure>
+</div>
+
+1. **beforeCreate** Se llama cuando la instancia se inicializa, después de que las props se resuelven y antes de procesar opciones como ```data()``` o ```computed```
+
+```javascript
+beforeCreate(){
+  //código a ejecutar
+}
+```
+
+2. **created** se llama cuando la instancia ha terminado de procesar todas las opciones relacionados con el estado, como lo son: datos reactivos, propiedades computadas, métodos y observadores, pero aún no comienza la fase de montado y la función ```$el``` aún no esta disponible.
+
+```javascript
+created(){
+  //lógica a ejecutar
+}
+```
+
+3. **beforeMount** se llama cuando el componente ha sido montado, pero no existen nodos en el DOM aún, pero están a punto de ser ejecutado el render el DOM por primera vez, no se llama su usamos renderizado del lado de servidor.
+
+```javascript
+beforeMount(){
+  //lógica a ejecutar
+}
+```
+
+4. **mounted** se llama cuando el componente ha sido montado, se considera montado cuando: todos sus componentes hijos síncronos han sido montados, no se incluyen los asíncronos o los que estén en modo suspendido ```<Suspense>``` , cuando su propio árbol del DOM ha sido creado e insertado en su contenedor padre. Tampoco es llamado durante renderizado del lado del servidor
+
+```javascript
+mounted(){
+  //lógica a ejecutar
+}
+```
+
+5. **beforeUpdate** se llama justo cuando el componente esta por actualizar su árbol del DOM, debido a un cambio reactivo. Este hook se puede usar para acceder al DOM justo cuando Vue esta por hacer un cambio.
+
+```javascript
+beforeUpdate(){
+  //lógica a ejecutar
+}
+```
+
+6. **updated** se llama justo cuando el componente ha sido actualizado por un cambio en su estado, En caso del padre su método se llamará cuando los métodos de sus hijos hayan terminado. Es importante tener cuidado si no somos precavidos podemos provocar ciclos de renderizado infinito.
+
+```javascript
+updated(){
+  //lógica a ejecutar
+}
+```
+
+7. **beforeUnmount** se llama justo cuando la instancia esta por salir del DOM, cuando usamos este hook la instancia que esta por salir aun es funcional
+
+```javascript
+beforeUnmount(){
+  //lógica a ejecutar
+}
+```
+
+8. **unmounted** se llama cuando el componente es desmontado, un componente se considera desmontado cuando: todos su hijos han sido desmontados y todos sus efectos reactivos se han detenido, este hook se utiliza cuando queremos limpiar de manera manual algunos efectos como cuentas regresivas, conexiones con el server o eventos del DOM.
+
+```javascript
+unmounted(){
+  //lógica a ejecutar
+}
+```
+
+> Todas se colocan dentro del objeto de configuración de la option API como una opción más.
+
+```javascript
+export default {
+  name: "App",
+  data() {
+    return {
+      text: 'Hello vue!',
+    };
+  },
+  beforeCreate(){
+    //código a ejecutar
+  },
+  created(){
+    //código a ejecutar
+  },
+  mounted(){
+    //código a ejecutar
+  },
+};
 ```
