@@ -17,6 +17,7 @@
 9. [Variables reactivas con ref y reactive](#variables-reactivas-con-ref-y-reactive)
 10. [Watch](#watch)
 11. [Computed](#computed)
+12. [Props](#props)
 
 <div style="margin-bottom:50px;"></div>
 
@@ -486,3 +487,46 @@ Las funciones computadas ayudan a tener un template mas limpio, en un compositio
 </script>
 ```
 
+<div style="margin-bottom:50px;"></div>
+
+## Props
+
+Propiedades del componente (parametros). Seguimos necesitando declarar la opcion props antes del setup. No basta con recibirlas como argumentos en setup.
+
+
+1. Componente Home
+
+```javascript
+<template>
+  <div>{{ fullName }}</div>
+</template>
+
+<script>
+    import { toRefs, computed } from "vue";
+    
+    export default {
+        props:{
+            firstName: String,
+            lastName: String,
+        },
+        setup(props) {            
+
+            const {firstName , lastName } = toRefs(props);
+
+            const fullName = computed(() => {
+                return `${firstName.value} ${lastName.value}`
+            });
+            return { 
+                fullName
+            }
+        },
+    };
+</script>
+```
+
+2. Llamada del componente Home con props
+```javascript
+<template>
+  <Home first-name="Developer" last-name="Vue"></Home>
+</template>
+```
