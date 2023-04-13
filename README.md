@@ -20,6 +20,7 @@
 12. [Props](#props)
 13. [Provide / Inject](#provide-inject)
 14. [Template refs](#template-refs)
+15. [Script setup](#script-setup)
 
 <div style="margin-bottom:50px;"></div>
 
@@ -612,3 +613,48 @@ Para recibir los datos: inject
 ## Template refs
 
 Enviar html reactivos con composition API
+
+<div style="margin-bottom:50px;"></div>
+
+## Script setup
+
+Es una azucar sintatica generada de vue, es decir al agregarle setup a la etiqueta script de componente, ya no es necesario declarar la variable y quedaria la estructura de la siguiente manera:
+
+```javascript
+<template>
+  <div>{{ fullName }}</div>
+  <div>{{ username }}</div>
+  <button ref="btn">Click!</button>
+</template>
+
+<script setup>
+import { defineProps, defineExpose, toRefs, computed, inject, ref, watch } from "vue";
+
+const props = defineProps({
+    firstName: String,
+    lastName: String,
+});
+
+const { firstName, lastName } = toRefs(props);
+const fullName = computed(() => {
+    return `${firstName.value} ${lastName.value}`;
+});
+const username = inject("username");
+
+defineExpose({
+    fullName,
+});
+
+const btn = ref(null);
+
+console.log(btn.value);
+
+watch(btn, (valor) => {
+    console.log(valor);
+})
+
+
+</script>
+``` 
+
+> Ya no se utiliza el export
