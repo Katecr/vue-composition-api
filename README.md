@@ -15,6 +15,8 @@
 7. [Ciclo de vida de los componentes](#ciclo-de-vida-de-los-componentes)
 8. [Introducción a Composition API](#introducción-a-composition-api)
 9. [Variables reactivas con ref y reactive](#variables-reactivas-con-ref-y-reactive)
+10. [Watch](#watch)
+11. [Computed](#computed)
 
 <div style="margin-bottom:50px;"></div>
 
@@ -453,3 +455,34 @@ Si utilizamos ref solo es necesario la variable
     };
 </script>
 ```
+
+<div style="margin-bottom:50px;"></div>
+
+## Computed
+
+Las funciones computadas ayudan a tener un template mas limpio, en un composition api se utilizan de la siguiente manera:
+
+```javascript
+<template>
+  <div>{{ fullName }}</div>
+</template>
+
+<script>
+    import { ref, computed } from "vue";
+    
+    export default {
+        setup() {
+            const firstName = ref('Kate');
+            const lastName = ref('Castaño');
+
+            const fullName = computed(() => {
+                return `${firstName.value} ${lastName.value}`
+            });
+            return { 
+                fullName
+            }
+        },
+    };
+</script>
+```
+
