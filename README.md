@@ -13,6 +13,8 @@
 5. [Transiciones](#transiciones)
 6. [Teleports](#teleports)
 7. [Ciclo de vida de los componentes](#ciclo-de-vida-de-los-componentes)
+8. [Introducción a Composition API](#introducción-a-composition-api)
+9. [Variables reactivas con ref y reactive](#variables-reactivas-con-ref-y-reactive)
 
 <div style="margin-bottom:50px;"></div>
 
@@ -306,4 +308,148 @@ export default {
     //código a ejecutar
   },
 };
+```
+
+<div style="margin-bottom:50px;"></div>
+
+## Introducción a Composition API
+
+Se utiliza un método setup para declarar en su interior todos sus componentes con funciones.
+
+```javascript
+<template>
+  <div>Hola</div>
+</template>
+
+<script>
+    import { onMounted } from "vue";
+    export default {
+        setup() {
+            onMounted(() => {
+                console.log("mounted!");
+            });
+        },
+    };
+</script>
+```
+
+
+<div style="margin-bottom:50px;"></div>
+
+## Variables reactivas con ref y reactive
+
+***ref*** permite crear una referencia reactiva a un dato o una variable
+
+```javascript
+<script>
+    import { ref } from "vue";
+    
+    export default {
+        setup() {
+            const text = ref("text");
+
+            return { 
+              text,
+            }
+        },
+    };
+</script>
+```
+
+> para leer el contenido usamos ```text.value```
+
+> podemos utilizar javascript vanilla utilizando la nomenclatuira camelcase para nombres de mas de una palabra
+```javascript
+<template>
+  <div>{{ counter }}</div>
+</template>
+
+<script>
+    import { ref } from "vue";
+    
+    export default {
+        setup() {
+            const counter = ref(0);
+
+            setInterval(() => counter.value++,500);
+            
+            return { 
+              counter,
+            }
+        },
+    };
+</script>
+```
+
+***ref*** permite crear una referencia reactiva a un objecto
+
+```javascript
+<script>
+    import { ref } from "vue";
+    
+    export default {
+        setup() {
+            const text = ref("text");
+
+            return { 
+              text,
+            }
+        },
+    };
+</script>
+```
+
+<div style="margin-bottom:50px;"></div>
+
+## Watch
+
+Watchers pero utilizando composition API
+
+```watcher``` son funciones que permiten escuchar cuando una variable reactiva cambia su valor y se puede acceder a su valor antiguo y nuevo y hacer algo con ellos.
+
+Si utilizamos reactive debe accederse atraves de función
+
+```javascript
+<script>
+    import { reactive, watch } from "vue";
+    
+    export default {
+        setup() {
+            const obj = reactive({counter:0});
+
+            setInterval(() => obj.counter++,500);
+
+            watch( () => obj.counter, (value, old) => {
+                console.log(value, old);
+            });
+
+            return { 
+              obj,
+            }
+        },
+    };
+</script>
+```
+
+Si utilizamos ref solo es necesario la variable
+
+```javascript
+<script>
+    import { watch, ref } from "vue";
+    
+    export default {
+        setup() {
+            const counter = ref(0);
+
+            setInterval(() => counter.value++,500);
+
+            watch(counter, (value, old) => {
+                console.log(value, old);
+            });
+            return { 
+              counter,
+            }
+        },
+    };
+</script>
 ```
