@@ -4,10 +4,16 @@
 
 <script>
     import Home from "./components/Home.vue";
+    import { provide, ref } from "vue";
+
     export default {
         name: "App",
         components: {
             Home,
+        },
+        setup() {
+          const username = ref("developuser")
+          provide("username", username);
         },
     };
 </script>

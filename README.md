@@ -18,6 +18,8 @@
 10. [Watch](#watch)
 11. [Computed](#computed)
 12. [Props](#props)
+13. [Provide / Inject](#provide-inject)
+14. [Template refs](#template-refs)
 
 <div style="margin-bottom:50px;"></div>
 
@@ -530,3 +532,83 @@ Propiedades del componente (parametros). Seguimos necesitando declarar la opcion
   <Home first-name="Developer" last-name="Vue"></Home>
 </template>
 ```
+
+<div style="margin-bottom:50px;"></div>
+
+## Context
+
+Es lo que va a utilizar Vue para enviar datos que pueden ser util durante la ejecución del componente
+
+```javascript
+setup(props, context) {
+  console.log(context)
+}
+```
+
+<div style="margin-bottom:50px;"></div>
+
+
+## Provide / Inject
+
+Es la forma en que vue ofrece para poder comunicar componentes profundos con el componente padre
+
+Para enviar datos: provide
+
+```javascript
+<template>
+  <Home first-name="Developer" last-name="Vue"></Home>
+</template>
+
+<script>
+    import Home from "./components/Home.vue";
+    import { provide } from "vue";
+    
+    export default {
+        name: "App",
+        components: {
+            Home,
+        },
+        setup() {
+          provide("username", "developuser");
+        },
+    };
+</script>
+```
+
+Para recibir los datos: inject
+```javascript
+<template>
+  <div>{{ fullName }}</div>
+  <div>{{ username }}</div>
+</template>
+
+<script>
+  import { toRefs, computed, inject } from "vue";
+  export default {
+    props: {
+      firstName: String,
+      lastName: String,
+    },
+    setup(props, { expose }) {
+      const { firstName, lastName } = toRefs(props);
+      const fullName = computed(() => {
+        return `${firstName.value} ${lastName.value}`;
+      });
+      const username = inject("username");
+      expose({
+        fullName,
+      });
+      return {
+        fullName,
+        username,
+      };
+    },
+  };
+</script>
+```
+
+<div style="margin-bottom:50px;"></div>
+
+## Template refs
+
+Enviar html reactivos con composition API
