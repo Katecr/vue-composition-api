@@ -10,6 +10,7 @@
 2. [Estructura del proyecto](#estructura-del-proyecto)
 3. [Componentes dinámicos](#componentes-dinámicos)
 4. [Componentes asíncronos](#componentes-asíncronos)
+5. [Transiciones](#transiciones)
 
 <div style="margin-bottom:50px;"></div>
 
@@ -111,3 +112,59 @@ const HelloWorld = defineAsyncComponent(()=> import("./components/HelloWorld.vue
 ### Ventajas
 1. Que los proyectos carguen mucho más rapido
 2. Que los proyectos solo carguen los componbentes que van a necesitar
+
+
+<div style="margin-bottom:50px;"></div>
+
+## Transiciones
+
+> https://vuejs.org/guide/built-ins/transition.html
+
+Permite aplicar css al momento de determinar si un elemento aparece o desaparece en pantalla.
+
+Por ejemplo: Utilizamos la transición para agregar un desvanecimiento al clickear el botón que muestra (U oculta) el menú.
+
+```javascript
+<script>
+import Menu from "./components/vMenu.vue";
+
+export default {
+  name: "App",
+  components: { Menu },
+  data() {
+    return {
+      show: false,
+    };
+  },
+};
+</script>
+
+<template>
+    <button @click="show = !show">Menu</button>
+    <transition name="fade">
+      <Menu v-show="show" />
+    </transition>
+</template>
+
+<style >
+.fade-enter-from,
+.fade-leave-to{
+  opacity:0;
+}
+.fade-enter-active,
+.fade-leave-active{
+  transition: opacity 0.3s ease;
+}
+</style>
+```
+Los modificadores que tiene una trancisión es:
+
+**from:** cuando se inicia la transición
+**to:** cuando se termina la transición
+**active:** cuando se está ejecutando la transición
+
+Para que funcione la transición, se debe agregar la clase .fade-enter-active o .fade-leave-active a los elementos que se quieren animar.
+
+**fade-enter-active:** cuando se inicia la transición
+
+**fade-leave-active:** cuando se termina la transición
